@@ -28,6 +28,10 @@ var funcs = [];
 var main = [];
 var g = {};
 
+var add_import = function(importst,key) {
+  imports.push(importst);
+  g[key] = true;
+}
 Blockly.Python['tee'] = function(block) {
   var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
   var statements_output = Blockly.Python.statementToCode(block, 'output');
@@ -45,23 +49,19 @@ Blockly.Python['stripper'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-var data_reader_code = function() {
-  imports.push("import pandas");
-  funcs.push('def read_csv(url,uri,config,streamType,columns):\n\treturn pandas.read_csv(uri+url)');
-  g['data_reader_code']=true;
-}
+
 
 Blockly.Python['data_reader'] = function(block) {
 
-  if( !g['data_reader_code'])
-    data_reader_code();
+  if( !g['csv_reader'])
+    add_import('import reader.CsvReader','csv_reader')
 
-  var code = 'read_csv('+block.getFieldValue('url')+','
-                        +block.getFieldValue('uri')+','
-                        +block.getFieldValue('config')+','
-                        +block.getFieldValue('streamType')+','
+  var code = 'CsvReader.read_csv("'+block.getFieldValue('url')+'","'
+                        +block.getFieldValue('uri')+'","'
+                        +block.getFieldValue('config')+'","'
+                        +block.getFieldValue('streamType')+'","'
                         +block.getFieldValue('columns')
-                        +')';
+                        +'")';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
@@ -90,14 +90,9 @@ Blockly.Python['createdf'] = function(block) {
 };
 
 Blockly.Python['program'] = function(block) {
-  var statements_operation = Blockly.Python.statementToCode(block, 'operation');
-  // console.log('('+statements_operation+')')
-  // TODO: Assemble Python into code variable.
+  var statements_operation = Blockly.Python.statementToCode(block, 'operation'); 
   var importstr = imports.join('\n');
-  var funcsstr = funcs.join('\n');
-  var mainstr = main.join('\n');
-
-  var code = importstr +'\n'+ funcsstr +'\n\n'+'if __name__ == "__main__"' + statements_operation + '\n';
+  var code = importstr +'\n\n'+ 'if __name__ == "__main__" :\n\n' + statements_operation + '\n';
   return code;
 };
 
@@ -136,9 +131,9 @@ Blockly.Python['ml'] = function(block) {
   var dropdown_type = block.getFieldValue('type');
   var text_shape = block.getFieldValue('shape');
   var value_config = Blockly.Python.valueToCode(block, 'Config', Blockly.Python.ORDER_ATOMIC);
-  // TODO: Assemble Python into code variable.
-  var code = value_config+'-ml...\n';
-  // TODO: Change ORDER_NONE to the correct strength.
+  if( !g['ml'])
+    add_import('import model.ModelBuilder','ml')	
+  var code = 'ModelBuilder.create_model(\''+dropdown_type+'\','+value_config+')';  
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -154,9 +149,9 @@ Blockly.Python['train'] = function(block) {
   var value_model = Blockly.Python.valueToCode(block, 'Model', Blockly.Python.ORDER_ATOMIC);
   var value_shaper = Blockly.Python.valueToCode(block, 'shaper', Blockly.Python.ORDER_ATOMIC);
   var checkbox_show_result = block.getFieldValue('show result') == 'TRUE';
-  // TODO: Assemble Python into code variable.
-  var code = value_model+'-'+value_shaper+'-train...\n';
-  // TODO: Change ORDER_NONE to the correct strength.
+  if( !g['ml'])
+    add_import('import model.ModelBuilder','ml')	
+  var code = 'ModelBuilder.train_model('+value_model+','+value_shaper+',\''+checkbox_show_result+'\')'; 
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -183,20 +178,14 @@ Blockly.Python['predict'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-var writer_code = function() {
-  imports.push("import pandas");
-  funcs.push('def write_csv(df,url):\n\tdf.to_csv(url)');
-  g['writer_code'] = true;
-}
 
 Blockly.Python['writer'] = function(block) {
   var dic = {}
   dic['value_writer_input'] = Blockly.Python.valueToCode(block, 'writer_input', Blockly.Python.ORDER_ATOMIC);
   dic['text_writer_uri_var'] = block.getFieldValue('writer_uri_var');
-  // TODO: Assemble Python into code variable.
-  if( !g['writer_code'] )
-    writer_code()
-  var code = '\nwrite_csv('+dic['value_writer_input']+','+dic['text_writer_uri_var']+')';
+  if( !g['writer'] )
+    add_import('import writer.CsvWriter','writer')
+  var code = 'CsvWriter.write_csv('+dic['value_writer_input']+',"'+dic['text_writer_uri_var']+'")\n';
   console.log('['+code+']')
   return code;
 };
