@@ -161,16 +161,17 @@ Blockly.Python['train'] = function(block) {
 };
 
 Blockly.Python['shaper'] = function(block) {
-  var value_name = Blockly.Python.valueToCode(block, 'NAME', Blockly.Python.ORDER_ATOMIC);
+  var value_shaper_xinput_csv = Blockly.Python.valueToCode(block, 'shaper_xinput_csv', Blockly.Python.ORDER_ATOMIC);
   var text_input_columns = block.getFieldValue('input columns');
-  var dropdown_dimension = block.getFieldValue('dimension');
+  var dropdown_xdimension = block.getFieldValue('xdimension');
+  var value_shaper_yinput_csv = Blockly.Python.valueToCode(block, 'shaper_yinput_csv', Blockly.Python.ORDER_ATOMIC);
   var text_output_columns = block.getFieldValue('output columns');
+  var dropdown_ydimension = block.getFieldValue('ydimension');
   var text_test_data = block.getFieldValue('test data');
   // TODO: Assemble Python into code variable.
-  var code = value_name+'-shaper...\n';
+  var code = 'shaper...';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
-  // return code;
 };
 
 Blockly.Python['predict'] = function(block) {

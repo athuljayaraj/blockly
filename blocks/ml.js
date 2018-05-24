@@ -535,14 +535,14 @@ Blockly.defineBlocksWithJsonArray([
 },
 {
   "type": "shaper",
-  "message0": "Shaper %1 CSV %2 X %3 Dimension %4 %5 Y %6 %7 Test Data %% %8",
+  "message0": "Shaper %1 XInput %2 X %3 Dimension %4 %5 YInput %6 Y %7 Dimension %8 %9 Test Data %% %10",
   "args0": [
     {
       "type": "input_dummy"
     },
     {
       "type": "input_value",
-      "name": "NAME",
+      "name": "shaper_xinput_csv",
       "check": "csv"
     },
     {
@@ -552,7 +552,38 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
       "type": "field_dropdown",
-      "name": "dimension",
+      "name": "xdimension",
+      "options": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "2",
+          "2"
+        ],
+        [
+          "3",
+          "3"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "shaper_yinput_csv",
+      "check": "csv"
+    },
+    {
+      "type": "field_input",
+      "name": "output columns",
+      "text": "-1"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "ydimension",
       "options": [
         [
           "1",
@@ -573,21 +604,13 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
       "type": "field_input",
-      "name": "output columns",
-      "text": "-1"
-    },
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "field_input",
       "name": "test data",
       "text": "20"
     }
   ],
   "inputsInline": false,
   "output": "shape",
-  "colour": 90,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
