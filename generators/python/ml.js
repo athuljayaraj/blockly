@@ -167,6 +167,7 @@ Blockly.Python['shaper'] = function(block) {
   var value_shaper_yinput_csv = Blockly.Python.valueToCode(block, 'shaper_yinput_csv', Blockly.Python.ORDER_ATOMIC);
   var text_output_columns = block.getFieldValue('output columns');
   var dropdown_ydimension = block.getFieldValue('ydimension');
+  var text_yoffset = block.getFieldValue('yoffset');
   var text_test_data = block.getFieldValue('test data');
   // TODO: Assemble Python into code variable.
   var code = 'shaper...';

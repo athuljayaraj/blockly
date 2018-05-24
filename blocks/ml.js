@@ -535,7 +535,7 @@ Blockly.defineBlocksWithJsonArray([
 },
 {
   "type": "shaper",
-  "message0": "Shaper %1 XInput %2 X %3 Dimension %4 %5 YInput %6 Y %7 Dimension %8 %9 Test Data %% %10",
+  "message0": "Shaper %1 XInput %2 X %3 Dimension %4 %5 YInput %6 Y %7 Dimension %8 Offset %9 %10 Test Data %% %11",
   "args0": [
     {
       "type": "input_dummy"
@@ -600,6 +600,11 @@ Blockly.defineBlocksWithJsonArray([
       ]
     },
     {
+      "type": "field_input",
+      "name": "yoffset",
+      "text": "0"
+    },
+    {
       "type": "input_dummy"
     },
     {
@@ -609,7 +614,7 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "inputsInline": false,
-  "output": "shape",
+  "output": null,
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
