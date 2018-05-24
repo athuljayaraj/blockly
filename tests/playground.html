@@ -15,6 +15,7 @@
 <script src="../generators/javascript/variables_dynamic.js"></script>
 <script src="../generators/javascript/procedures.js"></script>
 <script src="../generators/python.js"></script>
+<script src="../generators/python/ml.js"></script>
 <script src="../generators/python/logic.js"></script>
 <script src="../generators/python/loops.js"></script>
 <script src="../generators/python/math.js"></script>
@@ -64,7 +65,10 @@
 <script src="../blocks/variables.js"></script>
 <script src="../blocks/variables_dynamic.js"></script>
 <script src="../blocks/procedures.js"></script>
+<script src="../blocks/ml.js"></script>
 <script src="blocks/test_blocks.js"></script>
+
+
 <script>
 'use strict';
 var workspace = null;
@@ -409,6 +413,24 @@ h1 {
       <block type="logic_boolean"></block>
       <block type="logic_null" disabled="true"></block>
       <block type="logic_ternary"></block>
+    </category>
+    <category name="ML" colour="300">
+      <block type="tee"></block>
+      <block type="stripper"></block>
+      <block type="data_reader"></block>
+      <block type="model_reader"></block>
+      <block type="joiner"></block>
+      <block type="createdf"></block>
+      <block type="program"></block>
+      <block type="joiner_input"></block>
+      <block type="nn_config"></block>
+      <block type="nn_layer_config"></block>
+      <block type="ml"></block>
+      <block type="var"></block>
+      <block type="train"></block>
+      <block type="shaper"></block>
+      <block type="predict"></block>
+      <block type="writer"></block>      
     </category>
     <category name="Loops" colour="120">
       <block type="controls_repeat_ext">
