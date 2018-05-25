@@ -87,7 +87,7 @@ Blockly.defineBlocksWithJsonArray([
 },
 {
   "type": "data_reader",
-  "message0": "Data Reader %1 URL %2 %3 URI %4 %5 Config %6 %7 Output %8 %9 Columns %10",
+  "message0": "Data Reader %1 URL %2 %3 URI %4 %5 Config %6 %7 Output %8 %9 Columns %10 %11 Transformers %12",
   "args0": [
     {
       "type": "input_dummy"
@@ -137,6 +137,13 @@ Blockly.defineBlocksWithJsonArray([
       "type": "field_input",
       "name": "columns",
       "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "Transformers"
     }
   ],
   "inputsInline": false,
@@ -670,6 +677,33 @@ Blockly.defineBlocksWithJsonArray([
   "previousStatement": null,
   "nextStatement": null,
   "colour": 75,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "transformer",
+  "message0": "Transformer %1 Column %2 %3 Function %4",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "column",
+      "text": "0"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "function",
+      "text": "plus1"
+    }
+  ],
+  "inputsInline": true,
+  "output": null,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 }
