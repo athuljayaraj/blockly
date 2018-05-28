@@ -86,8 +86,8 @@ Blockly.defineBlocksWithJsonArray([
   "helpUrl": ""
 },
 {
-  "type": "data_reader",
-  "message0": "Data Reader %1 URL %2 %3 URI %4 %5 Config %6 %7 Output %8 %9 Columns %10 %11 Transformers %12",
+  "type": "csv_reader",
+  "message0": "CSV Reader %1 URL %2 %3 URI %4 %5 Config %6 %7 Output %8 %9 Columns %10 %11 Transformers %12",
   "args0": [
     {
       "type": "input_dummy"
@@ -262,7 +262,7 @@ Blockly.defineBlocksWithJsonArray([
 },
 {
   "type": "nn_config",
-  "message0": "NN Config %1 Optimizer %2 %3 Loss function %4 %5 Layers %6",
+  "message0": "NN Config %1 optimizer %2 %3 loss function %4 %5 Layers %6",
   "args0": [
     {
       "type": "input_dummy"
@@ -315,13 +315,13 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "output": null,
-  "colour": 90,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
 {
   "type": "nn_layer_config",
-  "message0": "NN Layer Config %1 Layer type %2 %3 Activation Function %4 %5 Optimizer %6 %7 Threshold %8",
+  "message0": "NN Layer Config %1 Layer type %2 %3 Activation Function %4 %5 Optimizer %6 %7 Threshold %8 %9 Input Shape %10",
   "args0": [
     {
       "type": "input_dummy"
@@ -331,16 +331,40 @@ Blockly.defineBlocksWithJsonArray([
       "name": "Layer type",
       "options": [
         [
-          "dropout",
-          "dropout"
+          "Dropout",
+          "Dropout"
         ],
         [
-          "dense",
-          "dense"
+          "Dense",
+          "Dense"
         ],
         [
-          "lstm",
-          "lstm"
+          "LSTM",
+          "LSTM"
+        ],
+        [
+          "RNN",
+          "RNN"
+        ],
+        [
+          "CNN",
+          "CNN"
+        ],
+        [
+          "CNN-2D",
+          "CNN-2D"
+        ],
+        [
+          "MaxPooling",
+          "MaxPooling"
+        ],
+        [
+          "MaxPooling-2D",
+          "MaxPooling-2D"
+        ],
+        [
+          "Flatten",
+          "Flatten"
         ]
       ]
     },
@@ -393,16 +417,24 @@ Blockly.defineBlocksWithJsonArray([
       "type": "field_input",
       "name": "threshold",
       "text": "0.5"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "shape"
     }
   ],
+  "inputsInline": false,
   "output": null,
-  "colour": 90,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
 {
-  "type": "ml",
-  "message0": "ML %1 %2 %3 Shape %4 %5 Config %6",
+  "type": "supervised_models",
+  "message0": "Supervised Models %1 %2 %3 Shape %4 %5 Config %6",
   "args0": [
     {
       "type": "input_dummy"
@@ -412,56 +444,28 @@ Blockly.defineBlocksWithJsonArray([
       "name": "type",
       "options": [
         [
-          "Gradient Descent",
-          "Gradient Descent"
+          "SVM Regression",
+          "SVM Regression"
         ],
         [
-          "Ordinary Least Squares Regression",
-          "Ordinary Least Squares Regression"
+          "SVM Classifiication",
+          "SVM Classification"
         ],
         [
-          "SVM Linear classifier",
-          "SVM Linear classifier"
-        ],
-        [
-          "NN_SKLearn MLP Classifier",
-          "NN_SKLearn MLP Classifier"
+          "Multi-Output Gradient Boosting Regressor",
+          "Multi-Output Gradient Boosting Regressor"
         ],
         [
           "KNN Classifier",
           "KNN Classifier"
         ],
         [
-          "NN_LSTM Sequential Classifier",
-          "NN_LSTM Sequential Classifier"
+          "Keras Sequential Model",
+          "Keras Sequential Model"
         ],
         [
-          "Gradient Boosting Regressor",
-          "Gradient Boosting Regressor"
-        ],
-        [
-          "NN_LSTM RNN Regression",
-          "NN_LSTM RNN Regression"
-        ],
-        [
-          "NN_LSTM CNN Regression",
-          "NN_LSTM CNN Regression"
-        ],
-        [
-          "Linear Regression SVM",
-          "Linear Regression SVM"
-        ],
-        [
-          "KNN Cluster",
-          "KNN Cluster"
-        ],
-        [
-          "DLib Clustering",
-          "DLib Clustering"
-        ],
-        [
-          "NN_CNN",
-          "NN_CNN"
+          "NN_SKLearn MLP Classifier",
+          "NN_SKLearn MLP Classifier"
         ]
       ]
     },
@@ -485,30 +489,59 @@ Blockly.defineBlocksWithJsonArray([
       ]
     }
   ],
-  "output": "model definition",
-  "colour": 90,
-  "tooltip": "testingte  stingg",
+  "output": null,
+  "colour": 230,
+  "tooltip": "",
   "helpUrl": ""
 },
 {
-  "type": "var",
-  "message0": "Identifier %1 %2",
+  "type": "unsupervised_models",
+  "message0": "Unsupervised Models %1 %2 %3 Shape %4 %5 Config %6",
   "args0": [
     {
-      "type": "field_variable",
-      "name": "NAME",
-      "variable": "item"
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "type",
+      "options": [        
+        [
+          "DLib Image Clustering",
+          "DLib Image Clustering"
+        ],
+        [
+          "K-Means Clustering",
+          "K-Means Clustering"
+        ],
+        [
+          "PCA",
+          "PCA"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "shape",
+      "text": "2,2"
+    },
+    {
+      "type": "input_dummy"
     },
     {
       "type": "input_value",
-      "name": "NAME",
-      "check": "model"
+      "name": "Config",
+      "check": [
+        "nnconfig",
+        "String"
+      ]
     }
   ],
-  "previousStatement": null,
-  "nextStatement": null,
-  "colour": 90,
-  "tooltip": "",
+  "output": null,
+  "colour": 230,
+  "tooltip": "testingte  stingg",
   "helpUrl": ""
 },
 {
@@ -653,8 +686,8 @@ Blockly.defineBlocksWithJsonArray([
   "helpUrl": ""
 },
 {
-  "type": "writer",
-  "message0": "Writer %1 Data/Model %2 URI %3",
+  "type": "csv_writer",
+  "message0": "CSV Writer %1 CSV %2 URI %3",
   "args0": [
     {
       "type": "input_dummy"
@@ -675,8 +708,95 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "inputsInline": false,
   "previousStatement": null,
-  "nextStatement": null,
-  "colour": 75,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "image_writer",
+  "message0": "Image Writer %1 Image %2 URI %3 %4 Regex %5",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "writer_input",
+      "check": "image"
+    },
+    {
+      "type": "field_input",
+      "name": "writer_uri_var",
+      "text": "default"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "imagewriter_regex",
+      "text": "*.jpg"
+    }
+  ],
+  "inputsInline": false,
+  "previousStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "model_writer",
+  "message0": "Model Writer %1 Model %2 URI %3 %4 Regex %5",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "writer_input",
+      "check": "image"
+    },
+    {
+      "type": "field_input",
+      "name": "writer_uri_var",
+      "text": "default"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "imagewriter_regex",
+      "text": "*.jpg"
+    }
+  ],
+  "inputsInline": false,
+  "previousStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "text_writer",
+  "message0": "Text Writer %1 Text %2 URI %3",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "textwriter_input",
+      "check": "String"
+    },
+    {
+      "type": "field_input",
+      "name": "writer_uri_var",
+      "text": "default"
+    }
+  ],
+  "inputsInline": false,
+  "previousStatement": null,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -703,6 +823,88 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "inputsInline": true,
   "output": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "image_reader",
+  "message0": "Image Reader %1 URL %2 %3 URI %4 %5 Transformers %6",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "url",
+      "text": "ftp://"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "uri",
+      "text": "/"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "Transformers"
+    }
+  ],
+  "inputsInline": false,
+  "output": null,
+  "colour": 120,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "text_reader",
+  "message0": "Text Reader %1 URL %2 %3 URI %4 %5 Transformers %6",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "url",
+      "text": "ftp://"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "uri",
+      "text": "/"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "Transformers"
+    }
+  ],
+  "inputsInline": false,
+  "output": null,
+  "colour": 120,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "outlier_deletion",
+  "message0": "Outlier Deletion",
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "norm_denorm",
+  "message0": "NormDenorm",
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
