@@ -19,6 +19,7 @@ def shape_data_frame(xdf,ydf,x_columns=None,y_columns=None,x_dimention=2,y_dimen
         x_array = np.delete(x_array.copy(), np.s_[x_array.shape[0] - y_offcet:x_array.shape[0]],axis=0)
         yarray = np.delete(yarray.copy(), np.s_[0:y_offcet], axis=0)
 
+        yarray = yarray.ravel()  if int(y_dimention) ==1  else yarray
     return x_array.astype(float),yarray.astype(float),x_array.astype(float),yarray.astype(float)
 
 

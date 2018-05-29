@@ -1,3 +1,18 @@
+'use strict';
+
+goog.provide('Blockly.Python.ml');
+goog.require('Blockly.Python');
+
+var imports = [];
+var funcs = [];
+var main = [];
+var g = {};
+
+var add_import = function(importst,key) {
+  imports.push(importst);
+  g[key] = true;
+}
+
 Blockly.Python['tee'] = function(block) {
   var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
   var statements_output = Blockly.Python.statementToCode(block, 'output');
@@ -16,14 +31,20 @@ Blockly.Python['stripper'] = function(block) {
 };
 
 Blockly.Python['csv_reader'] = function(block) {
-  var text_url = block.getFieldValue('url');
-  var text_uri = block.getFieldValue('uri');
-  var text_config = block.getFieldValue('config');
-  var dropdown_streamtype = block.getFieldValue('streamType');
-  var text_columns = block.getFieldValue('columns');
+  
+  if( !g['csv_reader'])
+    add_import('from reader import CsvReader','csv_reader')
+
+  var code = 'CsvReader.read_csv("'+block.getFieldValue('url')+'","'
+                        +block.getFieldValue('uri')+'",config="'
+                        +block.getFieldValue('config')+'",streamType="'
+                        +block.getFieldValue('streamType')+'",columns="'
+                        +block.getFieldValue('columns')
+                        +'")';
+
   var value_transformers = Blockly.Python.valueToCode(block, 'Transformers', Blockly.Python.ORDER_ATOMIC);
   // TODO: Assemble Python into code variable.
-  var code = '...';
+  
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
@@ -52,9 +73,9 @@ Blockly.Python['createdf'] = function(block) {
 };
 
 Blockly.Python['program'] = function(block) {
-  var statements_operation = Blockly.Python.statementToCode(block, 'operation');
-  // TODO: Assemble Python into code variable.
-  var code = '...\n';
+  var statements_operation = Blockly.Python.statementToCode(block, 'operation'); 
+  var importstr = imports.join('\n');
+  var code = importstr +'\n\n'+ 'if __name__ == "__main__" :\n\n' + statements_operation + '\n';
   return code;
 };
 
@@ -94,9 +115,9 @@ Blockly.Python['supervised_models'] = function(block) {
   var dropdown_type = block.getFieldValue('type');
   var text_shape = block.getFieldValue('shape');
   var value_config = Blockly.Python.valueToCode(block, 'Config', Blockly.Python.ORDER_ATOMIC);
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  if( !g['ml'])
+    add_import('from model import ModelBuilder','ml')	
+  var code = 'ModelBuilder.create_model(\''+dropdown_type+'\',config='+value_config+')';  
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -114,9 +135,9 @@ Blockly.Python['train'] = function(block) {
   var value_model = Blockly.Python.valueToCode(block, 'Model', Blockly.Python.ORDER_ATOMIC);
   var value_shaper = Blockly.Python.valueToCode(block, 'shaper', Blockly.Python.ORDER_ATOMIC);
   var checkbox_show_result = block.getFieldValue('show result') == 'TRUE';
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  if( !g['ml'])
+    add_import('from model import ModelBuilder','ml')	
+  var code = 'ModelBuilder.train_model('+value_model+','+value_shaper+',\''+checkbox_show_result+'\')'; 
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -129,26 +150,32 @@ Blockly.Python['shaper'] = function(block) {
   var dropdown_ydimension = block.getFieldValue('ydimension');
   var text_yoffset = block.getFieldValue('yoffset');
   var text_test_data = block.getFieldValue('test data');
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+ 
+  if( !g['DataSet'] )
+    add_import('from dataloader import DataSet','DataSet');
+  
+  var code = 'DataSet.shape_data_frame('+value_shaper_xinput_csv+',\''+value_shaper_yinput_csv+'\',x_columns=\''
+              +text_input_columns+'\',y_columns=\''+text_output_columns+'\',x_dimention=\''+dropdown_xdimension+'\',y_dimention=\''
+              +dropdown_ydimension+'\',y_offset=\''+text_yoffset+'\')';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['predict'] = function(block) {
   var variable_predict_model = Blockly.Python.variableDB_.getName(block.getFieldValue('predict_model'), Blockly.Variables.NAME_TYPE);
   var value_shape = Blockly.Python.valueToCode(block, 'Shape', Blockly.Python.ORDER_ATOMIC);
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  if( !g['ml'])
+      add_import('from model import ModelBuilder','ml') 
+  var code = 'ModelBuilder.predict_model('+variable_predict_model+','+value_shape+')';  
   return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['csv_writer'] = function(block) {
-  var value_writer_input = Blockly.Python.valueToCode(block, 'writer_input', Blockly.Python.ORDER_ATOMIC);
-  var text_writer_uri_var = block.getFieldValue('writer_uri_var');
-  // TODO: Assemble Python into code variable.
-  var code = '...\n';
+  var dic = {}
+  dic['value_writer_input'] = Blockly.Python.valueToCode(block, 'writer_input', Blockly.Python.ORDER_ATOMIC);
+  dic['text_writer_uri_var'] = block.getFieldValue('writer_uri_var');
+  if( !g['writer'] )
+    add_import('from writer import CsvWriter','writer')
+  var code = 'CsvWriter.write_csv('+dic['value_writer_input']+',"'+dic['text_writer_uri_var']+'")\n';
   return code;
 };
 
