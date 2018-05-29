@@ -48,7 +48,7 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "inputsInline": false,
-  "colour": 90,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -81,7 +81,7 @@ Blockly.defineBlocksWithJsonArray([
     "csv",
     "df"
   ],
-  "colour": 90,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -167,7 +167,7 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "inputsInline": false,
   "output": null,
-  "colour": 90,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -180,13 +180,12 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
       "type": "input_value",
-      "name": "readers",
-      "check": "csv"
+      "name": "readers"
     }
   ],
   "inputsInline": false,
   "output": null,
-  "colour": 90,
+  "colour": 230,
   "tooltip": "Joins multiple csv",
   "helpUrl": ""
 },
@@ -204,7 +203,7 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "nextStatement": "df",
-  "colour": 90,
+  "colour": 230,
   "tooltip": "Coverts csv to df",
   "helpUrl": ""
 },
@@ -221,7 +220,7 @@ Blockly.defineBlocksWithJsonArray([
       "check": "operation"
     }
   ],
-  "colour": 90,
+  "colour": 230,
   "tooltip": "A collection/sequence of operations",
   "helpUrl": ""
 },
@@ -256,7 +255,7 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "inputsInline": false,
   "output": null,
-  "colour": 90,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -541,7 +540,7 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "output": null,
   "colour": 230,
-  "tooltip": "testingte  stingg",
+  "tooltip": "",
   "helpUrl": ""
 },
 {
@@ -569,7 +568,7 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "inputsInline": false,
   "output": "model",
-  "colour": 90,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -681,7 +680,7 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "output": null,
-  "colour": 90,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -857,7 +856,7 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "inputsInline": false,
   "output": null,
-  "colour": 120,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -891,7 +890,7 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "inputsInline": false,
   "output": null,
-  "colour": 120,
+  "colour": 230,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -903,8 +902,61 @@ Blockly.defineBlocksWithJsonArray([
   "helpUrl": ""
 },
 {
-  "type": "norm_denorm",
-  "message0": "NormDenorm",
+  "type": "normalizer",
+  "message0": "NormDenorm %1 Range %2",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "range",
+      "text": "-1,1"
+    }
+  ],
+  "output": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "norm",
+  "message0": "Norm %1 Data/Shaper %2 Normalizer %3",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "data"
+    },
+    {
+      "type": "input_value",
+      "name": "normalizer"
+    }
+  ],
+  "output": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "denorm",
+  "message0": "DeNorm %1 Data/Shaper %2 Normalizer %3",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "data"
+    },
+    {
+      "type": "input_value",
+      "name": "normalizer"
+    }
+  ],
+  "output": null,
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
