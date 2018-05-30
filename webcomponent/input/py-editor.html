@@ -1,0 +1,26 @@
+<script>
+window.customElements.define('py-editor' ,class extends HTMLElement {
+  constructor() {
+    super();
+    this.template = document.createElement('template');
+    this.template.innerHTML = `
+    <textarea rows="4" cols="50">
+At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+</textarea>
+`
+this.attachShadow({mode: 'open'});
+
+  }
+
+  connectedCallback(){
+      let me = this;
+      me.shadowRoot.appendChild(
+        this.template.content.cloneNode(true));
+  }
+
+  showcode(code){
+    this.hidden = ''
+    this.shadowRoot.firstElementChild.innerText=code;
+  }
+});
+</script>
