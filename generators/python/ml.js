@@ -92,7 +92,6 @@ Blockly.Python['nn_config'] = function(block) {
   var dropdown_optimizer = block.getFieldValue('optimizer');
   var dropdown_loss_function = block.getFieldValue('loss function');
   var value_layers = Blockly.Python.valueToCode(block, 'layers', Blockly.Python.ORDER_ATOMIC);
-  // TODO: Assemble Python into code variable.
   var code = '\'{"loss_function":"'+dropdown_loss_function+',"optimizer":"'+dropdown_optimizer+'"}\','+value_layers;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
