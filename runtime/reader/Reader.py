@@ -2,7 +2,10 @@ import os
 import re
 import pandas
 import pickle
+import datetime as dt
 
+__folderName = None
+__fileName = None
 
 def csv_files_from_dir(folder):
     return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(csv)', f, flags=re.I)]
