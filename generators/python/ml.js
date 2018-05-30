@@ -48,9 +48,11 @@ Blockly.Python['csv_reader'] = function(block) {
 
 Blockly.Python['model_reader'] = function(block) {
   var text_url = block.getFieldValue('url');
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+
+  if( !g['csv_reader'])
+        add_import('from reader import Reader','csv_reader')
+  var code = 'Reader.read_model.read_model(\''+text_url+'\')';
+  
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -172,8 +174,8 @@ Blockly.Python['csv_writer'] = function(block) {
   dic['value_writer_input'] = Blockly.Python.valueToCode(block, 'writer_input', Blockly.Python.ORDER_ATOMIC);
   dic['text_writer_uri_var'] = block.getFieldValue('writer_uri_var');
   if( !g['writer'] )
-    add_import('from writer import CsvWriter','writer')
-  var code = 'CsvWriter.write_csv('+dic['value_writer_input']+',"'+dic['text_writer_uri_var']+'")\n';
+    add_import('from writer import Writer','writer')
+  var code = 'Writer.write_csv('+dic['value_writer_input']+',"'+dic['text_writer_uri_var']+'")\n';
   return code;
 };
 
@@ -191,7 +193,9 @@ Blockly.Python['model_writer'] = function(block) {
   var text_writer_uri_var = block.getFieldValue('writer_uri_var');
   var text_imagewriter_regex = block.getFieldValue('imagewriter_regex');
   // TODO: Assemble Python into code variable.
-  var code = '...\n';
+  if( !g['writer'] )
+    add_import('from writer import Writer','writer')
+  var code = 'Writer.write_model('+value_writer_input+',\''+text_writer_uri_var+'\',regx=\''+text_imagewriter_regex+'\')';
   return code;
 };
 
