@@ -34,7 +34,7 @@ Blockly.Python['csv_reader'] = function(block) {
   if( !g['csv_reader'])
     add_import('from reader import Reader','csv_reader')
 
-  var code = 'CsvReader.read_csv("'+block.getFieldValue('url')+'","'
+  var code = 'Reader.read_csv("'+block.getFieldValue('url')+'","'
                         +block.getFieldValue('uri')+'",config="'
                         +block.getFieldValue('config')+'",streamType="'
                         +block.getFieldValue('streamType')+'",columns="'
@@ -92,7 +92,7 @@ Blockly.Python['nn_config'] = function(block) {
   var dropdown_optimizer = block.getFieldValue('optimizer');
   var dropdown_loss_function = block.getFieldValue('loss function');
   var value_layers = Blockly.Python.valueToCode(block, 'layers', Blockly.Python.ORDER_ATOMIC);
-  var code = '\'{"loss_function":"'+dropdown_loss_function+',"optimizer":"'+dropdown_optimizer+'"}\','+value_layers;
+  var code = '\'{"loss_function":"'+dropdown_loss_function+'","optimizer":"'+dropdown_optimizer+'"}\','+value_layers;
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
@@ -105,7 +105,7 @@ Blockly.Python['nn_layer_config'] = function(block) {
   var value_shape = Blockly.Python.valueToCode(block, 'shape', Blockly.Python.ORDER_ATOMIC);
  
   var code = '\'{ "layer_type":"'+dropdown_layer_type+'" ,"activation":"'+dropdown_activation_function+
-              '","optimizer":"'+dropdown_optimizer+'","threshold":"'+text_threshold+'","input_shape":"'+value_shape+'"}\'';
+              '","optimizer":"'+dropdown_optimizer+'","threshold":"'+text_threshold+'","input_shape":'+value_shape+'}\'';
   
   return [code, Blockly.Python.ORDER_NONE];
 };
@@ -261,8 +261,8 @@ Blockly.Python['norm'] = function(block) {
 Blockly.Python['denorm'] = function(block) {
   var value_data = Blockly.Python.valueToCode(block, 'data', Blockly.Python.ORDER_ATOMIC);
   var value_normalizer = Blockly.Python.valueToCode(block, 'normalizer', Blockly.Python.ORDER_ATOMIC);
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  if( !g['utils'] )
+    add_import('from dataloader import Utils','utils')
+  var code = 'Utils.inverse_transform('+value_data+','+value_normalizer+')';
   return [code, Blockly.Python.ORDER_NONE];
 };
