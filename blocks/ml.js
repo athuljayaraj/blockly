@@ -20,7 +20,7 @@
 
 'use strict';
 
-goog.provide('Blockly.Blocks.ml');  // Deprecated
+goog.provide('Blockly.Blocks.ml');
 goog.provide('Blockly.Constants.ml');
 
 goog.require('Blockly.Blocks');
@@ -296,12 +296,12 @@ Blockly.defineBlocksWithJsonArray([
           "mean_absolute_error"
         ],
         [
-          "option",
-          "OPTIONNAME"
+          "categorical_crossentropy",
+          "categorical_crossentropy"
         ],
         [
-          "option",
-          "OPTIONNAME"
+          "binary_crossentropy",
+          "binary_crossentropy"
         ]
       ]
     },
@@ -389,6 +389,10 @@ Blockly.defineBlocksWithJsonArray([
         [
           "softmax",
           "softmax"
+        ],
+        [
+          "linear",
+          "linear"
         ]
       ]
     },
@@ -406,6 +410,10 @@ Blockly.defineBlocksWithJsonArray([
         [
           "Adam",
           "Adam"
+        ],
+        [
+          "adadelta",
+          "adadelta"
         ]
       ]
     },
