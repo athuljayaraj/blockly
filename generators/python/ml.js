@@ -104,8 +104,10 @@ Blockly.Python['nn_layer_config'] = function(block) {
   var text_threshold = block.getFieldValue('threshold');
   var value_shape = Blockly.Python.valueToCode(block, 'shape', Blockly.Python.ORDER_ATOMIC);
  
+  value_shape = value_shape && typeof value_shape === 'string'  && value_shape.startsWith("'")  && value_shape.endsWith("'")? value_shape.substring(1,value_shape.length-1) : value_shape
+ 
   var code = '\'{ "layer_type":"'+dropdown_layer_type+'" ,"activation":"'+dropdown_activation_function+
-              '","optimizer":"'+dropdown_optimizer+'","threshold":"'+text_threshold+'","input_shape":'+value_shape+'}\'';
+              '","optimizer":"'+dropdown_optimizer+'","threshold":"'+text_threshold+'","input_shape":"'+value_shape+'"}\'';
   
   return [code, Blockly.Python.ORDER_NONE];
 };
