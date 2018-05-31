@@ -67,7 +67,7 @@ Blockly.Python['csv_reader'] = function(block) {
                         +block.getFieldValue('config')+'",streamType="'
                         +block.getFieldValue('streamType')+'",columns="'
                         +block.getFieldValue('columns')
-                        +'")';
+                        +'",filter="'+dropdown_selection+'",count='+text_number_of_rows+')';
 
   var value_transformers = Blockly.Python.valueToCode(block, 'Transformers', Blockly.Python.ORDER_ATOMIC);
  
@@ -288,9 +288,9 @@ Blockly.Python['denorm'] = function(block) {
   var value_data = Blockly.Python.valueToCode(block, 'data', Blockly.Python.ORDER_ATOMIC);
   var value_normalizer = Blockly.Python.valueToCode(block, 'normalizer', Blockly.Python.ORDER_ATOMIC);
   var dropdown_axis = block.getFieldValue('axis');
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  if( !g['utils'] )
+    add_import('from dataloader import Utils','utils')
+  var code = 'Utils.inverse_transform('+value_data+','+value_normalizer+',axis=\''+dropdown_axis+'\')';
   return [code, Blockly.Python.ORDER_NONE];
 };
 
