@@ -287,14 +287,8 @@ Blockly.Python['denorm'] = function(block) {
   var value_data = Blockly.Python.valueToCode(block, 'data', Blockly.Python.ORDER_ATOMIC);
   var value_normalizer = Blockly.Python.valueToCode(block, 'normalizer', Blockly.Python.ORDER_ATOMIC);
   var dropdown_axis = block.getFieldValue('axis');
-<<<<<<< HEAD
   if( !g['utils'] )
     add_import('from dataloader import Utils','utils')
   var code = 'Utils.inverse_transform('+value_data+','+value_normalizer+',axis=\''+dropdown_axis+'\')';
-=======
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
->>>>>>> da47d2a69cf9c5dab4a13fd3c7544f3619c65e68
   return [code, Blockly.Python.ORDER_NONE];
 };
