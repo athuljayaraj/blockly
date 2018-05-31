@@ -67,7 +67,7 @@ Blockly.Python['csv_reader'] = function(block) {
                         +block.getFieldValue('config')+'",streamType="'
                         +block.getFieldValue('streamType')+'",columns="'
                         +block.getFieldValue('columns')
-                        +'")';
+                        +'",filter="'+dropdown_selection+'",count='+text_number_of_rows+')';
 
   var value_transformers = Blockly.Python.valueToCode(block, 'Transformers', Blockly.Python.ORDER_ATOMIC);
 
@@ -294,6 +294,6 @@ Blockly.Python['denorm'] = function(block) {
   var dropdown_axis = block.getFieldValue('axis');
   if( !g['utils'] )
     add_import('from dataloader import Utils','utils')
-  var code = 'Utils.inverse_transform('+value_data+','+value_normalizer+')';
+  var code = 'Utils.inverse_transform('+value_data+','+value_normalizer+',axis=\''+dropdown_axis+'\')';
   return [code, Blockly.Python.ORDER_NONE];
 };
