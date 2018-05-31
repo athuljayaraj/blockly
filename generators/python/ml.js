@@ -355,3 +355,11 @@ Blockly.Python['text_encoder'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['tupler'] = function(block) {
+  var value_tupler_input = Blockly.Python.valueToCode(block, 'tupler_input', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
