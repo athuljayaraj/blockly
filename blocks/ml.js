@@ -150,16 +150,16 @@ Blockly.defineBlocksWithJsonArray([
       "name": "selection",
       "options": [
         [
+          "full",
+          "full"
+        ],
+        [
           "head",
           "head"
         ],
         [
           "tail",
           "tail"
-        ],
-        [
-          "full",
-          "full"
         ]
       ]
     },
@@ -537,7 +537,7 @@ Blockly.defineBlocksWithJsonArray([
 },
 {
   "type": "unsupervised_models",
-  "message0": "Unsupervised Models %1 %2 %3 Shape %4 %5 Config %6",
+  "message0": "Unsupervised Models %1 %2 %3 Shape %4 %5 Config %6 Input %7",
   "args0": [
     {
       "type": "input_dummy"
@@ -545,7 +545,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "type",
-      "options": [        
+      "options": [
         [
           "DLib Image Clustering",
           "DLib Image Clustering"
@@ -578,11 +578,15 @@ Blockly.defineBlocksWithJsonArray([
         "nnconfig",
         "String"
       ]
+    },
+    {
+      "type": "input_value",
+      "name": "input"
     }
   ],
   "output": null,
   "colour": 230,
-  "tooltip": "",
+  "tooltip": "testingte  stingg",
   "helpUrl": ""
 },
 {
