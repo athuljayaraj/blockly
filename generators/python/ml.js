@@ -67,7 +67,7 @@ Blockly.Python['csv_reader'] = function(block) {
                         +block.getFieldValue('config')+'",streamType="'
                         +block.getFieldValue('streamType')+'",columns="'
                         +block.getFieldValue('columns')
-                        +'",filter="'+dropdown_selection+'",count='+text_number_of_rows+')';
+                        +'")';
 
   var value_transformers = Blockly.Python.valueToCode(block, 'Transformers', Blockly.Python.ORDER_ATOMIC);
  
@@ -146,15 +146,15 @@ Blockly.Python['supervised_models'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.JavaScript['unsupervised_models'] = function(block) {
+Blockly.Python['unsupervised_models'] = function(block) {
   var dropdown_type = block.getFieldValue('type');
   var text_shape = block.getFieldValue('shape');
-  var value_config = Blockly.JavaScript.valueToCode(block, 'Config', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_input = Blockly.JavaScript.valueToCode(block, 'input', Blockly.JavaScript.ORDER_ATOMIC);
-  // TODO: Assemble JavaScript into code variable.
+  var value_config = Blockly.Python.valueToCode(block, 'Config', Blockly.Python.ORDER_ATOMIC);
+  var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
   var code = '...';
   // TODO: Change ORDER_NONE to the correct strength.
-  return [code, Blockly.JavaScript.ORDER_NONE];
+  return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['train'] = function(block) {
@@ -288,9 +288,9 @@ Blockly.Python['denorm'] = function(block) {
   var value_data = Blockly.Python.valueToCode(block, 'data', Blockly.Python.ORDER_ATOMIC);
   var value_normalizer = Blockly.Python.valueToCode(block, 'normalizer', Blockly.Python.ORDER_ATOMIC);
   var dropdown_axis = block.getFieldValue('axis');
-  if( !g['utils'] )
-    add_import('from dataloader import Utils','utils')
-  var code = 'Utils.inverse_transform('+value_data+','+value_normalizer+',axis=\''+dropdown_axis+'\')';
+  // TODO: Assemble Python into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -303,3 +303,50 @@ Blockly.Python['image_transformer'] = function(block) {
   return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['text_tokenizer'] = function(block) {
+  var value_text_tokenizer_vocabulary = Blockly.Python.valueToCode(block, 'text_tokenizer_vocabulary', Blockly.Python.ORDER_ATOMIC);
+  var text_text_tokenizer_column = block.getFieldValue('text_tokenizer_column');
+  // TODO: Assemble Python into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['label_encoder'] = function(block) {
+  var value_label_encoder_classes = Blockly.Python.valueToCode(block, 'label_encoder_classes', Blockly.Python.ORDER_ATOMIC);
+  var text_label_encoder_column = block.getFieldValue('label_encoder_column');
+  // TODO: Assemble Python into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['encode_labels'] = function(block) {
+  var value_encode_labels_data = Blockly.Python.valueToCode(block, 'encode_labels_data', Blockly.Python.ORDER_ATOMIC);
+  var value_encode_labels_encoder = Blockly.Python.valueToCode(block, 'encode_labels_encoder', Blockly.Python.ORDER_ATOMIC);
+  var text_encode_labels_column = block.getFieldValue('encode_labels_column');
+  // TODO: Assemble Python into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['decode_labels'] = function(block) {
+  var value_decode_labels_data = Blockly.Python.valueToCode(block, 'decode_labels_data', Blockly.Python.ORDER_ATOMIC);
+  var value_decode_labels_encoder = Blockly.Python.valueToCode(block, 'decode_labels_encoder', Blockly.Python.ORDER_ATOMIC);
+  var text_decode_labels_column = block.getFieldValue('decode_labels_column');
+  // TODO: Assemble Python into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['text_encoder'] = function(block) {
+  var value_text_encoder_data = Blockly.Python.valueToCode(block, 'text_encoder_data', Blockly.Python.ORDER_ATOMIC);
+  var value_text_encoder_tokenizer = Blockly.Python.valueToCode(block, 'text_encoder_tokenizer', Blockly.Python.ORDER_ATOMIC);
+  var text_text_encoder_column = block.getFieldValue('text_encoder_column');
+  // TODO: Assemble Python into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
