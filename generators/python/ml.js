@@ -207,6 +207,7 @@ Blockly.Python['csv_writer'] = function(block) {
 
 Blockly.Python['image_writer'] = function(block) {
   var value_writer_input = Blockly.Python.valueToCode(block, 'writer_input', Blockly.Python.ORDER_ATOMIC);
+  var value_result = Blockly.Python.valueToCode(block, 'result', Blockly.Python.ORDER_ATOMIC);
   var text_writer_uri_var = block.getFieldValue('writer_uri_var');
   var text_imagewriter_regex = block.getFieldValue('imagewriter_regex');
   // TODO: Assemble Python into code variable.
@@ -292,3 +293,13 @@ Blockly.Python['denorm'] = function(block) {
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };
+
+Blockly.Python['image_transformer'] = function(block) {
+  var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
+  var value_config = Blockly.Python.valueToCode(block, 'config', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = '...';
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
+};
+
