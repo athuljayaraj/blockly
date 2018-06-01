@@ -87,7 +87,7 @@ Blockly.defineBlocksWithJsonArray([
 },
 {
   "type": "csv_reader",
-  "message0": "CSV Reader %1 URL %2 %3 URI %4 %5 Config %6 %7 Output %8 %9 Columns %10 %11 Transformers %12 Selection %13 %14 Number of rows %15",
+  "message0": "CSV Reader %1 URL %2 %3 URI %4 %5 Config %6 %7 Header@ %8 %9 Output %10 %11 Columns %12 %13 Transformers %14 Selection %15 %16 Number of rows %17",
   "args0": [
     {
       "type": "input_dummy"
@@ -112,6 +112,14 @@ Blockly.defineBlocksWithJsonArray([
       "type": "field_input",
       "name": "config",
       "text": "default"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "csv_reader_header",
+      "text": "1"
     },
     {
       "type": "input_dummy"
@@ -551,7 +559,8 @@ Blockly.defineBlocksWithJsonArray([
   "output": null,
   "colour": 230,
   "tooltip": "",
-  "helpUrl": ""
+  "helpUrl": "",
+  "extensions":["config_on_change"]
 },
 {
   "type": "unsupervised_models",
@@ -1142,8 +1151,8 @@ Blockly.defineBlocksWithJsonArray([
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
-}
-,{
+},
+{
   "type": "decode_labels",
   "message0": "Decode labels %1 Encoded Labels %2 Label Encoder %3 Column %4",
   "args0": [
@@ -1213,5 +1222,14 @@ Blockly.defineBlocksWithJsonArray([
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
-}
+},
+Blockly.Extensions.register('config_on_change', function() {
+  // Example validation upon block change:
+  this.setOnChange(function(changeEvent) {
+    console.log(changeEvent)
+    if(changeEvent.type == 'change') {
+    document.querySelector('load-template').changeModel(changeEvent)
+    }    
+  });
+})
 ]);
