@@ -7,6 +7,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Activation,Conv2D,Flatten,Dropout,MaxPooling2D,MaxPooling1D,Conv1D,LSTM,RNN
 from keras.models import Sequential
 
+
 def create_model(model_type,shape =None,config=None):
     if model_type == 'Multi-Output Gradient Boosting Regressor':
         random_state = 0
@@ -46,11 +47,6 @@ def create_model(model_type,shape =None,config=None):
 
     if model_type == 'Keras Sequential Model' :
         return __create_sequential_model(config)
-
-
-def predict_model(model,shaper):
-    return  model.predict(shaper[0][0:1])
-
 
 
 def __create_svm_classifier__(config):
@@ -98,7 +94,7 @@ def __create_sequential_model(configs):
         if layer_type=='Dense':
             if input_shape :
                 array = get_array_from_string(input_shape)
-                model.add(Dense(int(threshold),activation=activation_function,input_shape=(array)))
+                model.add(Dense(int(threshold),activation=activation_function,input_shape=tuple(array)))
             else :
                 model.add(Dense(int(threshold), activation=activation_function))
 
@@ -139,24 +135,29 @@ def __create_sequential_model(configs):
 def get_array_from_string(input_string,separator=','):
     array =[]
     if input_string :
-        array = [int(x) for x in input_string.split(separator)]
+        array = [ int(x) for x in input_string.split(separator) if x]
     return array
 
 
 def train_model(model,shaper, showResult = True):
     if model is not None :
-
-        if showResult or showResult =='true':
-            if type(model) is Sequential:
-                model.fit(shaper[0], shaper[1], batch_size=500, epochs=10, shuffle=False)
-                model.evaluate(shaper[2], shaper[3],verbose=0)
-            else :
-                model.fit(shaper[0], shaper[1])
+        if type(model) is Sequential:
+            model.fit(shaper[0], shaper[1], batch_size=500, epochs=10, shuffle=False)
+            if showResult or showResult == 'true':
+                model.evaluate(shaper[2], shaper[3],verbose=1)
+        else :
+            model.fit(shaper[0], shaper[1])
+            if showResult or showResult == 'true':
                 result = model.score(shaper[2], shaper[3])
                 print("Model accuracy",result * 100)
     return model
 
 
+def predict_model(model,shaper):
+    if type(shaper) is tuple :
+        return model.predict(shaper[2])
+    else:
+        return model.predict(shaper)
 
 
 
