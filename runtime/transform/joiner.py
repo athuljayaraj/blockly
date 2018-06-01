@@ -1,3 +1,4 @@
+from functools import reduce
 import pandas as pd
 import numpy as np
 
@@ -6,19 +7,19 @@ def concat(list_of_joiner_input):
         joiner_input.get('csv')
 
 
-# def join(list_of_joiner_input, style):
-    # if (style == 'join' and len(list_of_joiner_input) > 1):
-    #     for joiner_input in list_of_joiner_input[1:]:
+def join(list_of_joiner_input, style):
+    df = None
+    if style == 'join':
+        df = reduce(lambda left, right: pd.merge(left.get('csv'), right.get('csv'), left_on=left.get('column'),
+                                                       right_on=right.get('column')), list_of_joiner_input)
+    return df
 
 
-
-
-
-def myfunc(x):
-    return x+1
+import pandas as pd
+import numpy as np
 
 if __name__ == '__main__':
-    # joiner.join([{"csv":, "key":1, "columns":"1"}, {"csv":, "key":1, "columns":"1"}, {"csv":, "key":1, "columns":"1"}], 'row')
-    df = pd.DataFrame(np.random.randint(0, 100, size=(100, 4)), columns=list('ABCD'))
-    tt = df.transform({'A': myfunc, 'B': lambda x: x})
-    print(myfunc(10))
+    df1 = pd.DataFrame({'a': [1, 2, 3], 'b': [2, 3, 4]})
+    df2 = pd.DataFrame({'a': [1, 2, 3], 'c': [4, 7, 9]})
+    dt = join([{"csv":df1,"key":'a',"columns":"1,2,3"}, {"csv":df2,"key":'a',"columns":"1,2,3"}],'join')
+    print(dt)
