@@ -46,7 +46,7 @@ Blockly.Python['stripper'] = function(block) {
     
   if( !g['stripper'])
     add_import('from transform import stripper','stripper')
-  var code = 'stripper.strip(columns=\'' + text_columns +'\',df='+value_csv+')'
+  var code = 'stripper.strip(columns=\'' + text_columns +'\'.split(\',\'),df='+value_csv+')'
   return [code, Blockly.Python.ORDER_NONE];
 };
 
