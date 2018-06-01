@@ -199,19 +199,37 @@ Blockly.defineBlocksWithJsonArray([
 },
 {
   "type": "joiner",
-  "message0": "Joiner %1 Readers %2",
+  "message0": "Joiner %1 Joiner Input %2 Style %3",
   "args0": [
     {
       "type": "input_dummy"
     },
     {
       "type": "input_value",
-      "name": "readers"
+      "name": "joiner_inputs_list"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "joiner_style",
+      "options": [
+        [
+          "Row",
+          "row"
+        ],
+        [
+          "Column",
+          "column"
+        ],
+        [
+          "Join",
+          "join"
+        ]
+      ]
     }
   ],
   "inputsInline": false,
   "output": null,
-  "colour": 230,
+  "colour": 90,
   "tooltip": "Joins multiple csv",
   "helpUrl": ""
 },
@@ -252,14 +270,14 @@ Blockly.defineBlocksWithJsonArray([
 },
 {
   "type": "joiner_input",
-  "message0": "Joiner Element %1 CSV %2 Key %3 %4 Columns %5",
+  "message0": "Joiner Input %1 CSV %2 Key %3 %4 Columns %5",
   "args0": [
     {
       "type": "input_dummy"
     },
     {
       "type": "input_value",
-      "name": "csv",
+      "name": "joiner_input_csv",
       "check": [
         "csv",
         "df"
@@ -267,7 +285,7 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
       "type": "field_input",
-      "name": "key",
+      "name": "joiner_input_key",
       "text": "1"
     },
     {
@@ -275,13 +293,13 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
       "type": "field_input",
-      "name": "columns",
+      "name": "joiner_input_columns",
       "text": "1"
     }
   ],
   "inputsInline": false,
   "output": null,
-  "colour": 230,
+  "colour": 90,
   "tooltip": "",
   "helpUrl": ""
 },
@@ -1196,5 +1214,4 @@ Blockly.defineBlocksWithJsonArray([
   "tooltip": "",
   "helpUrl": ""
 }
-
 ]);
