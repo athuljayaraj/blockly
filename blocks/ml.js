@@ -559,7 +559,8 @@ Blockly.defineBlocksWithJsonArray([
   "output": null,
   "colour": 230,
   "tooltip": "",
-  "helpUrl": ""
+  "helpUrl": "",
+  "extensions":["config_on_change"]
 },
 {
   "type": "unsupervised_models",
@@ -1150,8 +1151,8 @@ Blockly.defineBlocksWithJsonArray([
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
-}
-,{
+},
+{
   "type": "decode_labels",
   "message0": "Decode labels %1 Encoded Labels %2 Label Encoder %3 Column %4",
   "args0": [
@@ -1221,5 +1222,14 @@ Blockly.defineBlocksWithJsonArray([
   "colour": 230,
   "tooltip": "",
   "helpUrl": ""
-}
+},
+Blockly.Extensions.register('config_on_change', function() {
+  // Example validation upon block change:
+  this.setOnChange(function(changeEvent) {
+    console.log(changeEvent)
+    if(changeEvent.type == 'change') {
+    document.querySelector('load-template').changeModel(changeEvent)
+    }    
+  });
+})
 ]);
