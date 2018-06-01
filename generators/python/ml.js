@@ -153,9 +153,10 @@ Blockly.Python['unsupervised_models'] = function(block) {
   var text_shape = block.getFieldValue('shape');
   var value_config = Blockly.Python.valueToCode(block, 'Config', Blockly.Python.ORDER_ATOMIC);
   var value_input = Blockly.Python.valueToCode(block, 'input', Blockly.Python.ORDER_ATOMIC);
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  if( !g['un_ml'])
+    add_import('from model import UnsupervisedModelBuilder','un_ml') 
+  var code = 'UnsupervisedModelBuilder.create_model(\''+dropdown_type+'\','+value_input+','+value_config+')';
+  
   return [code, Blockly.Python.ORDER_NONE];
 };
 
@@ -358,8 +359,8 @@ Blockly.Python['text_encoder'] = function(block) {
 
 Blockly.Python['tupler'] = function(block) {
   var value_tupler_input = Blockly.Python.valueToCode(block, 'tupler_input', Blockly.Python.ORDER_ATOMIC);
-  // TODO: Assemble Python into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  
+   var code = 'tuple('+value_tupler_input+')';
+ 
   return [code, Blockly.Python.ORDER_NONE];
 };
