@@ -3,6 +3,8 @@ import re
 import pandas
 import pickle
 import datetime as dt
+from skimage import io
+import numpy as np
 
 
 __folderName = None
@@ -87,6 +89,19 @@ def get_array_from_string(input_string,separator=','):
         array = [int(x) for x in input_string.split(separator)]
     return array
 
+
+def _image_files_in_folder_(folder):
+        return [os.path.join(folder, f) for f in os.listdir(folder) if re.match(r'.*\.(jpg|jpeg|png)', f, flags=re.I)]
+
+
+def read_image(url,uri=None):
+    if uri is None :
+        arr=[]
+        for file_path in _image_files_in_folder_(url):
+            arr.append(io.imread(file_path))
+        return np.asarray(arr)
+    else:
+        return io.imread(os.path.join(url,uri))
 
 
 
