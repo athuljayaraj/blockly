@@ -139,15 +139,15 @@ def get_array_from_string(input_string,separator=','):
     return array
 
 
-def train_model(model,shaper, showResult = True):
+def train_model(model,shaper, showResult):
     if model is not None :
         if type(model) is Sequential:
             model.fit(shaper[0], shaper[1], batch_size=500, epochs=10, shuffle=False)
-            if showResult or showResult == 'true':
+            if  showResult == 'true':
                 model.evaluate(shaper[2], shaper[3],verbose=1)
         else :
             model.fit(shaper[0], shaper[1])
-            if showResult or showResult == 'true':
+            if  showResult == 'true':
                 result = model.score(shaper[2], shaper[3])
                 print("Model accuracy",result * 100)
     return model

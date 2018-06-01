@@ -58,7 +58,7 @@ def text_to_matrix(text_values,column,tokenizer):
 """
 convert the text to numpy array using the Keras Tokenizer
 """
-def get_encodered_labels(y_labels,column,encoder):
+def get_encodered_labels(y_labels,column,encoder,to_categorical=True):
     y_train  = None
     if type(y_labels) is pandas.DataFrame :
         y_train =encoder.transform(y_labels.iloc[:, column])  # only fit on train
@@ -69,7 +69,7 @@ def get_encodered_labels(y_labels,column,encoder):
     else :
         y_train = encoder.transform(y_labels)
 
-    if len(encoder.classes_) > 2 : # assumes that binary classification
+    if len(encoder.classes_) > 2  and to_categorical : # assumes that binary classification
         return utils.to_categorical(y_train, len(encoder.classes_))
     return y_train
 
