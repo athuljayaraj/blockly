@@ -58,6 +58,9 @@ Blockly.Python['csv_reader'] = function(block) {
   var dropdown_streamtype = block.getFieldValue('streamType');
   var text_columns = block.getFieldValue('columns');
   var value_transformers = Blockly.Python.valueToCode(block, 'Transformers', Blockly.Python.ORDER_ATOMIC);
+  if (!value_transformers) {
+    value_transformers = ''
+  }
   var dropdown_selection = block.getFieldValue('selection');
   var text_number_of_rows = block.getFieldValue('number of rows');
   
@@ -71,7 +74,7 @@ Blockly.Python['csv_reader'] = function(block) {
                         '",columns="'+block.getFieldValue('columns')+
                         '",filter="'+dropdown_selection+
                         '",count='+text_number_of_rows+
-                        '",header='+text_csv_reader_header+
+                        ',header="'+text_csv_reader_header+
                         '",transformers='+value_transformers+
                         ')';
   return [code, Blockly.Python.ORDER_NONE];
@@ -364,8 +367,17 @@ Blockly.Python['text_encoder'] = function(block) {
 
 Blockly.Python['tupler'] = function(block) {
   var value_tupler_input = Blockly.Python.valueToCode(block, 'tupler_input', Blockly.Python.ORDER_ATOMIC);
-  
-   var code = 'tuple('+value_tupler_input+')';
- 
+  var code = 'tuple('+value_tupler_input+')';
   return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['graph'] = function(block) {
+  var text_graph_title = block.getFieldValue('graph_title');
+  var text_graph_x_label = block.getFieldValue('graph_x_label');
+  var value_graph_x_input = Blockly.Python.valueToCode(block, 'graph_x_input', Blockly.Python.ORDER_ATOMIC);
+  var text_graph_y_label = block.getFieldValue('graph_y_label');
+  var value_graph_y_input = Blockly.Python.valueToCode(block, 'graph_y_input', Blockly.Python.ORDER_ATOMIC);
+  // TODO: Assemble Python into code variable.
+  var code = '...\n';
+  return code;
 };

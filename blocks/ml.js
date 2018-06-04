@@ -1223,6 +1223,44 @@ Blockly.defineBlocksWithJsonArray([
   "tooltip": "",
   "helpUrl": ""
 },
+{
+  "type": "graph",
+  "message0": "Graph %1 Title %2 %3 X input %4 %5 Y input %6 %7",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "graph_title",
+      "text": ""
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "graph_x_label",
+      "text": "x_label"
+    },
+    {
+      "type": "input_value",
+      "name": "graph_x_input"
+    },
+    {
+      "type": "field_input",
+      "name": "graph_y_label",
+      "text": "y_label"
+    },
+    {
+      "type": "input_value",
+      "name": "graph_y_input"
+    }
+  ],
+  "colour": 230,
+  "tooltip": "Draw a graph",
+  "helpUrl": ""
+},
 Blockly.Extensions.register('config_on_change', function() {
   // Example validation upon block change:
   this.setOnChange(function(changeEvent) {
