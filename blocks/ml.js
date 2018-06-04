@@ -613,8 +613,9 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "output": null,
   "colour": 230,
-  "tooltip": "testingte  stingg",
-  "helpUrl": ""
+  "tooltip": "",
+  "helpUrl": "",
+  "extensions":["config_on_change"]
 },
 {
   "type": "train",
@@ -1264,7 +1265,7 @@ Blockly.defineBlocksWithJsonArray([
 
 Blockly.Extensions.register('config_on_change', function() {
   this.setOnChange(function(changeEvent) {
-    if(changeEvent.type == 'change') {
+    if(changeEvent.name == 'type' && changeEvent.oldValue != changeEvent.newValue) {
     document.querySelector('load-template').changeModel(changeEvent)
     }    
   });
