@@ -59,7 +59,7 @@ Blockly.Python['csv_reader'] = function(block) {
   var text_columns = block.getFieldValue('columns');
   var value_transformers = Blockly.Python.valueToCode(block, 'Transformers', Blockly.Python.ORDER_ATOMIC);
   if (!value_transformers) {
-    value_transformers = ''
+    value_transformers = 'None'
   }
   var dropdown_selection = block.getFieldValue('selection');
   var text_number_of_rows = block.getFieldValue('number of rows');
