@@ -1261,10 +1261,9 @@ Blockly.defineBlocksWithJsonArray([
   "tooltip": "Draw a graph",
   "helpUrl": ""
 },
+
 Blockly.Extensions.register('config_on_change', function() {
-  // Example validation upon block change:
   this.setOnChange(function(changeEvent) {
-    console.log(changeEvent)
     if(changeEvent.type == 'change') {
     document.querySelector('load-template').changeModel(changeEvent)
     }    
