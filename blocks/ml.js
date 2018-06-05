@@ -222,15 +222,15 @@ Blockly.defineBlocksWithJsonArray([
       "options": [
         [
           "Row",
-          "row"
+          0
         ],
         [
           "Column",
-          "column"
+          1
         ],
         [
           "Join",
-          "join"
+          2
         ]
       ]
     }
