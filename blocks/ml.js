@@ -515,6 +515,10 @@ Blockly.defineBlocksWithJsonArray([
           "SVM Classification"
         ],
         [
+          "Random_Forest_Regressor",
+          "Random_Forest_Regressor"
+        ],
+        [
           "Gradient Boosting Regressor",
           "Gradient Boosting Regressor"
         ],
