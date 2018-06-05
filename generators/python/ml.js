@@ -104,7 +104,7 @@ Blockly.Python['joiner_input'] = function(block) {
   var text_joiner_input_key = block.getFieldValue('joiner_input_key');
   var text_joiner_input_columns = block.getFieldValue('joiner_input_columns');
   // TODO: Assemble Python into code variable.
-  var code = '{"csv":' + value_joiner_input_csv+',"key":'+text_joiner_input_key+',"columns":"'+text_joiner_input_columns+'"}';
+  var code = '{"csv":' + value_joiner_input_csv+',"key":'+text_joiner_input_key+'}';
   // TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Python.ORDER_NONE];
 };

@@ -298,11 +298,6 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
       "type": "input_dummy"
-    },
-    {
-      "type": "field_input",
-      "name": "joiner_input_columns",
-      "text": "1"
     }
   ],
   "inputsInline": false,
