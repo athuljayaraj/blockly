@@ -54,7 +54,7 @@ def __create_svm_classifier__(config):
     #(C=1.0, kernel='rbf', degree=3, gamma=0.0, coef0=0.0, shrinking=True, probability=False,tol=0.001, cache_size=200,
     # class_weight=None, verbose=False, max_iter=-1, random_state=None)
     # sample keranal  values "linear", "rbf","poly","sigmoid"
-
+    #svm.SVC(decision_function_shape='ovo') FOR MULTILABEL CLASSIFICATION ,degree=3, gamma='auto'
     data = json.loads(config)
     c = data.get('c') if data.get('c') else 1
     gamma = data.get('gamma') if data.get('gamma') else 1

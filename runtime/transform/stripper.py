@@ -1,6 +1,7 @@
 
 def strip(columns, df):  # columns: list of columns numbers to be stripped
     try:
+		columns=columns.split(',')
         results = list(map(int, columns))
     except:
         stripped_df = df.drop(columns, axis=1)

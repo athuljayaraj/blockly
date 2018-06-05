@@ -26,9 +26,9 @@ def create_model(model_type,shaper,config=None):
 def __createKMEAN_cluster__(dataset, config) :
     data = json.loads(config)
     n_components = data.get('n_clusters') if data.get('n_clusters') else 3
-    kmeans = KMeans(n_clusters=6)
+    kmeans = KMeans(n_clusters=n_components)
     dataset = __get_value__(dataset)
-    clusters =   kmeans.fit(dataset)
+    clusters = kmeans.fit(dataset)
     return clusters.labels_
 
 
