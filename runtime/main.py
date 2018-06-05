@@ -1,91 +1,31 @@
 df = None
-dataset = None
-model_def = None
+tokenizer = None
+label_encoder = None
+encoded_labels = None
+inputdata = None
+test_df = None
+text_X = None
+test_Y = None
+shaper = None
 model = None
-result = None
+
 
 from reader import Reader
-from model import ModelBuilder
-from dataloader import DataSet
-from sklearn import datasets
-import numpy as np
 from dataloader import Utils
+from dataloader import DataSet
+from model import ModelBuilder
+from writer import Writer
 
+if __name__ == "__main__" :
 
-if __name__ == "__main__":
-
-
-  scaler_x = Utils.get_preprocessing_scaler(min_max_tuple=(-1, 1))
-  #scaler_y = Utils.get_preprocessing_scaler(feature_range=(-1, 1))
-
-
-  #X = np.sort(100 * np.random.rand(2082, 8), axis=0)
-
-  #y = np.sin(X[:,0]).ravel()
-
-  ###############################################################################
-  # Add noise to targets
-  #y[::5] += 3 * (0.5 - np.random.rand(8))
-  # print (X.shape,X)
-  #print (y.shape,y)
-
-  #dataset = (X,y,X,y)
-
-  #model = ModelBuilder.create_model('SVM Regression', config='{"keranal":"linear","c":1,"gamma":1}')
-  #model = ModelBuilder.train_model(model, dataset, 'true')
-
-  '''df = Reader.read_csv("data","NSE_Abbott India Limited.csv",config="default",streamType="csv",columns="")
-  dataset = DataSet.shape_data_frame(df,'',x_columns='1:9',y_columns='3',x_dimention='3',y_dimention='1',y_offset='1')
-  dataset = Utils.fit_transform(dataset,scaler_x)
-  print (dataset[0].shape)
-  print(dataset[1].shape)
-  print (dataset[2].shape)
-  print (dataset[3].shape)
-  print (dataset[1])
-
-  model = None'''
-
-  dataframe = None
-  shaper = None
-  normalizer = None
-  modelfef = None
-  model = None
-  result = None
-
-  from reader import Reader
-  from dataloader import DataSet
-  from dataloader import Utils
-  from model import ModelBuilder
-
-  if __name__ == "__main__":
-    dataframe = Reader.read_csv("data", "NSE_Abbott India Limited.csv", config="default", streamType="df",
-                                   columns="")
-    shaper = DataSet.shape_data_frame(dataframe, '', x_columns='1:9', y_columns='3', x_dimention='3', y_dimention='1',
-                                      y_offset=1, test_data_size=20)
-    normalizer = Utils.get_preprocessing_scaler(min_max_tuple=(-1, 1))
-    shaper = Utils.fit_transform(shaper, normalizer)
-    modelfef = ModelBuilder.create_model('Keras Sequential Model', shape='1,8', config=(
-    '{"loss_function":"mean_absolute_error,"optimizer":"adam"}',
-    ['{ "layer_type":"LSTM" ,"activation":"Tanh","optimizer":"Adam","threshold":"100","input_shape":"'1, 8'"}',
-     '{ "layer_type":"Dropout" ,"activation":"sigmoid","optimizer":"sgd","threshold":".2","input_shape":""}',
-     '{ "layer_type":"Dense" ,"activation":"linear","optimizer":"Adam","threshold":"1","input_shape":""}']))
-    model = ModelBuilder.train_model(modelfef, shaper, 'true')
-    result = ModelBuilder.predict_model(model, shaper)
-
-  model = ModelBuilder.create_model('Sequential', config=('{"loss_function":"mean_squared_error","optimizer":"adam"}',
-                                                          ['{"layer_type":"LSTM","threshold":"1000","activation":"tanh","input_shape":"'+str(dataset[0].shape[1])+','+str(dataset[0].shape[2])+'"}',
-                                                           '{"layer_type":"Dropout","threshold":"0.2"}',
-                                                           '{"layer_type":"Dense","threshold":1,"activation":"linear"}']))
-  model = ModelBuilder.train_model(model, dataset, 'true')
-
-  """
-  print (dataset[0].shape)
-  model_def = ModelBuilder.create_model('Gradient Boosting Regressor',config='{"random_state":0}')
-  """
-
-  result = ModelBuilder.predict_model(model,dataset)
-  print(Utils.inverse_transform(result,scaler_x))
-
-
-
-
+  df = Reader.read_csv("data","sentiment_train.csv",config="default",streamType="csv",columns="0,1",filter="full",count=5)
+  tokenizer =  Utils.get_text_tokenizer(df,1)
+  label_encoder = Utils.get_label_encoder(df,0)
+  encoded_labels = DataSet.get_encodered_labels(df,0,label_encoder)
+  inputdata = DataSet.text_to_matrix(df,1,tokenizer)
+  test_df = Reader.read_csv("data","sentiment_test.csv",config="default",streamType="df",columns="0,1",filter="full",count=5)
+  text_X = DataSet.text_to_matrix(test_df,1,tokenizer)
+  test_Y = DataSet.get_encodered_labels(test_df,0,label_encoder)
+  shaper = tuple([inputdata, encoded_labels, text_X, test_Y])
+  model = ModelBuilder.train_model((ModelBuilder.create_model('KNN Classifier',shape='2,2',config='{"n_neighbors":1,"algorithm":"ball_tree","weights":"distance"}')),shaper,'true')
+  Writer.write_csv((DataSet.get_label((ModelBuilder.predict_model(model,text_X)),0,label_encoder)),"default")
