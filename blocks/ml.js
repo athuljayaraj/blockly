@@ -222,15 +222,15 @@ Blockly.defineBlocksWithJsonArray([
       "options": [
         [
           "Row",
-          "row"
+          0
         ],
         [
           "Column",
-          "column"
+          1
         ],
         [
           "Join",
-          "join"
+          2
         ]
       ]
     }
@@ -613,8 +613,9 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "output": null,
   "colour": 230,
-  "tooltip": "testingte  stingg",
-  "helpUrl": ""
+  "tooltip": "",
+  "helpUrl": "",
+  "extensions":["config_on_change"]
 },
 {
   "type": "train",
@@ -1261,11 +1262,10 @@ Blockly.defineBlocksWithJsonArray([
   "tooltip": "Draw a graph",
   "helpUrl": ""
 },
+
 Blockly.Extensions.register('config_on_change', function() {
-  // Example validation upon block change:
   this.setOnChange(function(changeEvent) {
-    console.log(changeEvent)
-    if(changeEvent.type == 'change') {
+    if(changeEvent.name == 'type' && changeEvent.oldValue != changeEvent.newValue) {
     document.querySelector('load-template').changeModel(changeEvent)
     }    
   });
